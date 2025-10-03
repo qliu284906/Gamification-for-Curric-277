@@ -1,0 +1,662 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gee's 13 Learning Principles - Layered Structure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        
+        .intro {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 50px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+        
+        .pyramid-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .layer-section {
+            width: 100%;
+            position: relative;
+        }
+        
+        /* Different layer widths - creating pyramid effect */
+        .layer-1 {
+            width: 95%;
+        }
+        
+        .layer-2 {
+            width: 80%;
+        }
+        
+        .layer-3 {
+            width: 60%;
+        }
+        
+        .layer-wrapper {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid;
+            position: relative;
+        }
+        
+        .layer-1 .layer-wrapper {
+            border-color: #3498db;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), rgba(93, 173, 226, 0.05));
+        }
+        
+        .layer-2 .layer-wrapper {
+            border-color: #9b59b6;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.05), rgba(187, 143, 206, 0.05));
+        }
+        
+        .layer-3 .layer-wrapper {
+            border-color: #2ecc71;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.05), rgba(88, 214, 141, 0.05));
+        }
+        
+        .layer-badge {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            font-size: 0.9em;
+        }
+        
+        .layer-1 .layer-badge {
+            background: linear-gradient(135deg, #3498db, #5dade2);
+        }
+        
+        .layer-2 .layer-badge {
+            background: linear-gradient(135deg, #9b59b6, #bb8fce);
+        }
+        
+        .layer-3 .layer-badge {
+            background: linear-gradient(135deg, #2ecc71, #58d68d);
+        }
+        
+        .layer-header {
+            margin-bottom: 20px;
+        }
+        
+        .layer-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .layer-1 .layer-title {
+            color: #3498db;
+        }
+        
+        .layer-2 .layer-title {
+            color: #9b59b6;
+        }
+        
+        .layer-3 .layer-title {
+            color: #2ecc71;
+        }
+        
+        .layer-description {
+            color: #666;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        
+        .principle-box {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .principle-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+        
+        .layer-1 .principle-box:hover {
+            border-color: #3498db;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);
+        }
+        
+        .layer-2 .principle-box:hover {
+            border-color: #9b59b6;
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.25);
+        }
+        
+        .layer-3 .principle-box:hover {
+            border-color: #2ecc71;
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.25);
+        }
+        
+        .principle-num {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1em;
+        }
+        
+        .layer-1 .principle-num {
+            background: #3498db;
+        }
+        
+        .layer-2 .principle-num {
+            background: #9b59b6;
+        }
+        
+        .layer-3 .principle-num {
+            background: #2ecc71;
+        }
+        
+        .principle-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            padding-right: 40px;
+        }
+        
+        .layer-1 .principle-name {
+            color: #3498db;
+        }
+        
+        .layer-2 .principle-name {
+            color: #9b59b6;
+        }
+        
+        .layer-3 .principle-name {
+            color: #2ecc71;
+        }
+        
+        .principle-summary {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .arrow-up {
+            text-align: center;
+            font-size: 2.5em;
+            margin: 10px 0;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 750px;
+            width: 100%;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 35px;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+        
+        .close-btn:hover {
+            color: #333;
+        }
+        
+        .modal-title {
+            font-size: 1.9em;
+            margin-bottom: 25px;
+            padding-right: 40px;
+            line-height: 1.3;
+        }
+        
+        .modal-section {
+            margin-bottom: 25px;
+        }
+        
+        .modal-label {
+            font-weight: bold;
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .modal-text {
+            line-height: 1.7;
+            color: #333;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .game-box {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin-top: 10px;
+        }
+        
+        .example-box {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2196F3;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .edu-box {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .connector-line {
+            text-align: center;
+            color: #999;
+            font-size: 0.95em;
+            margin: 15px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gee's 13 Learning Principles</h1>
+        
+        <div class="intro">
+            <strong>Learning is built step by step, like constructing a building!</strong><br>
+            From bottom to top: Build the foundation → Practice on it → Form deep understanding at the top
+        </div>
+        
+        <div class="pyramid-container">
+            
+            <!-- Layer 3: Understanding (Top) -->
+            <div class="layer-section layer-3">
+                <div class="layer-wrapper">
+                    <div class="layer-badge">3</div>
+                    <div class="layer-header">
+                        <div class="layer-title">Understanding</div>
+                        <div class="layer-description">
+                            <strong>Ultimate goal:</strong> Form systematic deep understanding through embodied experience
+                        </div>
+                    </div>
+                    
+                    <div class="principles-grid">
+                        <div class="principle-box" onclick="showModal(12)">
+                            <div class="principle-num">12</div>
+                            <div class="principle-name">System Thinking</div>
+                            <div class="principle-summary">See relationships and the whole system</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(13)">
+                            <div class="principle-num">13</div>
+                            <div class="principle-name">Meaning as Action Image</div>
+                            <div class="principle-summary">Understand meaning through experience and action</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector-line">↑ Accumulated through practice, finally forming deep understanding</div>
+            
+            <!-- Layer 2: Practice (Middle) -->
+            <div class="layer-section layer-2">
+                <div class="layer-wrapper">
+                    <div class="layer-badge">2</div>
+                    <div class="layer-header">
+                        <div class="layer-title">Practice</div>
+                        <div class="layer-description">
+                            <strong>Learning by doing:</strong> Growth through well-designed practice and challenges
+                        </div>
+                    </div>
+                    
+                    <div class="principles-grid">
+                        <div class="principle-box" onclick="showModal(5)">
+                            <div class="principle-num">5</div>
+                            <div class="principle-name">Well-Ordered Problems</div>
+                            <div class="principle-summary">Problems sequenced from simple to complex</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(6)">
+                            <div class="principle-num">6</div>
+                            <div class="principle-name">Pleasantly Frustrating</div>
+                            <div class="principle-summary">Challenging but achievable</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(7)">
+                            <div class="principle-num">7</div>
+                            <div class="principle-name">Cycles of Expertise</div>
+                            <div class="principle-summary">Practice → Mastery → New challenge → Re-learn</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(8)">
+                            <div class="principle-num">8</div>
+                            <div class="principle-name">Information "On Demand" & "Just in Time"</div>
+                            <div class="principle-summary">Information when you need it</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(9)">
+                            <div class="principle-num">9</div>
+                            <div class="principle-name">Fish Tanks</div>
+                            <div class="principle-summary">Simplify first, highlight key variables</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(10)">
+                            <div class="principle-num">10</div>
+                            <div class="principle-name">Sandboxes</div>
+                            <div class="principle-summary">Safe space for experimentation</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(11)">
+                            <div class="principle-num">11</div>
+                            <div class="principle-name">Skills as Strategies</div>
+                            <div class="principle-summary">Skills as means to achieve goals</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="connector-line">↑ With foundation established, practice can begin</div>
+            
+            <!-- Layer 1: Foundation (Bottom) -->
+            <div class="layer-section layer-1">
+                <div class="layer-wrapper">
+                    <div class="layer-badge">1</div>
+                    <div class="layer-header">
+                        <div class="layer-title">Foundation</div>
+                        <div class="layer-description">
+                            <strong>The base:</strong> Establish learner agency, identity, and tool capability
+                        </div>
+                    </div>
+                    
+                    <div class="principles-grid">
+                        <div class="principle-box" onclick="showModal(1)">
+                            <div class="principle-num">1</div>
+                            <div class="principle-name">Co-Design</div>
+                            <div class="principle-summary">Active producers, not passive consumers</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(2)">
+                            <div class="principle-num">2</div>
+                            <div class="principle-name">Customize</div>
+                            <div class="principle-summary">Learn in your preferred way</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(3)">
+                            <div class="principle-num">3</div>
+                            <div class="principle-name">Identity</div>
+                            <div class="principle-summary">Identify with a valued role</div>
+                        </div>
+                        
+                        <div class="principle-box" onclick="showModal(4)">
+                            <div class="principle-num">4</div>
+                            <div class="principle-name">Manipulation & Distributed Knowledge</div>
+                            <div class="principle-summary">Extend capability through smart tools</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+    
+    <script>
+        const principlesData = {
+            1: {
+                title: "1. Co-Design",
+                color: "#3498db",
+                principle: "Good learning requires that learners feel like active agents (producers) not just passive recipients (consumers).",
+                games: "In a video game, players make things happen. They don't just consume what the 'author' (game designer) has placed before them. Video games are interactive. The player does something and the game does something back that encourages the player to act again. In good games, players feel that their actions and decisions – and not just the designers' actions and decisions – are co-creating the world they are in and the experiences they are having.",
+                example: "The Elder Scrolls: Morrowind is an extreme example of a game where each decision the player makes changes the game in ways that ensure that each player's game is, in the end, different from any other player's.",
+                education: "Co-design means ownership, buy in, engaged participation. It is a key part of motivation. Do student decisions and actions make a difference in the classroom curriculum? Are students helping to design their own learning? The whole curriculum should be shaped by the learner's actions and react back on the learner in meaningful ways."
+            },
+            2: {
+                title: "2. Customize",
+                color: "#3498db",
+                principle: "Different styles of learning work better for different people. People cannot be agents of their own learning if they cannot make decisions about how their learning will work. At the same time, they should be able (and encouraged) to try new styles.",
+                games: "Good games achieve this goal in one (or both) of two ways. In some games, players are able to customize the game play to fit their learning and playing styles. In others, the game is designed to allow different styles of learning and playing to work.",
+                example: "Rise of Nations allows players to customize myriad aspects of the game play to their own styles, interests, and desires. Deus Ex and its sequel Deus Ex: Invisible War both allow quite different styles of play and, thus, learning, too, to succeed.",
+                education: "Classrooms adopting this principle would allow students to discover their favored learning styles and to try new ones without fear. Can students engage in such customization in the classroom? Are there multiple pathways through the curriculum? Can students solve problems in different ways without being punished?"
+            },
+            3: {
+                title: "3. Identity",
+                color: "#3498db",
+                principle: "Deep learning requires an extended commitment and such a commitment is powerfully recruited when people take on a new identity they value and in which they become heavily invested.",
+                games: "In video games, players take on a new identity. Sometimes this is a character with a rich back story in a realistic virtual world. Sometimes it is a more open-ended character that players must build a history for through their decisions and actions in a world. Both work.",
+                example: "Metal Gear Solid's Solid Snake has a compelling history that invites players to project their own fantasies, desires, and motivations onto him. In The Elder Scrolls: Morrowind, players build a deep and consequential history through interaction with a rich world full of history, norms, and values.",
+                education: "Good education moves beyond a 'content fetish' - students should take on identities as particular types of scientists, historians, writers, etc. In such identities, learners learn facts and information not as a list to be memorized but as tools for doing things and being a certain type of person in a certain domain."
+            },
+            4: {
+                title: "4. Manipulation & Distributed Knowledge",
+                color: "#3498db",
+                principle: "Humans feel expanded and empowered when they can manipulate powerful tools. In virtual worlds, learners manipulate objects and thus feel agency. At the same time, the virtual character they're playing is a 'smart tool' with knowledge and skills the player may not yet have.",
+                games: "In good video games, the virtual character or smart tool has knowledge built in that must be integrated with the player's own knowledge. The player and the virtual character form one system distributed across the person and the tool.",
+                example: "In Full Spectrum Warrior, the player gives orders to two squads of soldiers. The soldiers know how to engage in professional military tactics. The player needs to know strategy, not tactics. Together, the player and the soldiers make one smart fighting unit.",
+                education: "Students should use smart tools that have expertise built into them. Learning happens when the student integrates their growing knowledge with the knowledge built into the tool. Like Galileo using geometry to understand pendulums, students engage in authentic practices by combining their emerging understanding with powerful disciplinary tools."
+            },
+            5: {
+                title: "5. Well-Ordered Problems",
+                color: "#9b59b6",
+                principle: "Problems should be ordered so that early ones prepare learners to form productive hypotheses that will work for later, more complex problems. Early problems should not allow creative but ultimately unproductive solutions.",
+                games: "Good games carefully design problem sequences. Early problems teach players to form generalizable strategies that will be useful throughout the game. This prevents players from developing habits that will fail later.",
+                example: "Return to Castle Wolfenstein and Fatal Frame 2 both carefully sequence problems so players develop increasingly sophisticated strategies that scaffold their growing competence.",
+                education: "Avoid 'anything goes' approaches that let novices develop unproductive patterns. Design problem spaces carefully - what looks like infinite possibility to a novice is actually a space where experts see productive patterns. Guide students to discover fruitful approaches early."
+            },
+            6: {
+                title: "6. Pleasantly Frustrating",
+                color: "#9b59b6",
+                principle: "Good learning happens when problems feel hard but doable. Learners should feel their effort is paying off and that they're making progress even as they fail. Hard is good, but must be engaging and achievable.",
+                games: "Good games adjust difficulty dynamically or allow players to adjust it. They provide clear progress feedback. Players feel challenged but capable, never bored or helplessly frustrated.",
+                example: "Halo and Rise of Nations both maintain appropriate challenge levels with good feedback systems that help players feel their growing competence.",
+                education: "Avoid uniform difficulty (too easy for some, impossible for others). Allow difficulty adjustment while encouraging learners to stay at their competence edge. Assessment should be about mastery, not comparison or speed. Remove arbitrary deadlines that turn productive struggle into anxiety."
+            },
+            7: {
+                title: "7. Cycles of Expertise",
+                color: "#9b59b6",
+                principle: "Expertise develops through cycles: practice skills until automatic → those skills fail on new problems → practice new skills → repeat. Starting the cycle too early or too late causes frustration or boredom.",
+                games: "Games use levels for practice and bosses to force integration of skills. After mastering a boss, new levels introduce the cycle again at a higher level. This creates a satisfying sense of growing sophistication.",
+                example: "Ratchet and Clank and Final Fantasy X masterfully alternate between practice phases and integration challenges, creating rhythm in the learning experience.",
+                education: "Create rhythm between practice and challenge, mastery and new learning. This teaches learners how to manage lifelong learning. Students should feel they're accumulating capabilities, not treading water. Avoid both endless drill and constant novelty."
+            },
+            8: {
+                title: "8. Information 'On Demand' and 'Just in Time'",
+                color: "#9b59b6",
+                principle: "Humans learn best from verbal information when it's given just in time (when they can use it) and on demand (when they feel they need it). Information out of context is poorly retained and hard to apply.",
+                games: "Game manuals become useful after play begins. Good games provide information at the moment it becomes relevant and usable, often through tutorials integrated into early gameplay.",
+                example: "System Shock 2 distributes manual information across early levels in discoverable logs. Enter the Matrix adds glossary entries exactly when concepts become relevant to gameplay.",
+                education: "Let learners 'play the game' before heavy verbal instruction. Lectures and textbooks work best 'on demand' after experience creates a need to know. This prevents the common problem of students who can pass tests but can't apply knowledge because they learned it divorced from use."
+            },
+            9: {
+                title: "9. Fish Tanks",
+                color: "#9b59b6",
+                principle: "Learners should first operate in simplified systems where some variables are removed. Like a fish tank versus an ocean, this lets learners understand basic mechanics before facing full complexity.",
+                games: "Tutorial levels or early scenarios strip away complexity to highlight fundamental systems. Players can experiment and understand core mechanics in a controlled environment.",
+                example: "Rise of Nations tutorial scenarios like 'Alfred the Great' present the core systems in miniature, allowing players to understand resource management and unit production before facing the full game's complexity.",
+                education: "Use simplified models showing key variables before introducing full complexity. Like scientists using models and theories, students need simplified entry points. They can study a model ecosystem before the messy reality of a pond. This isn't 'dumbing down' - it's revealing essential structure."
+            },
+            10: {
+                title: "10. Sandboxes",
+                color: "#9b59b6",
+                principle: "Learners need safe spaces to try things, take risks, and fail with reduced consequences. When they master the domain, everywhere becomes a sandbox - they can take calculated risks within the rules.",
+                games: "Tutorial levels provide authentic gameplay but with reduced stakes. Early mistakes don't permanently damage later success. Players can experiment with strategies without fear.",
+                example: "Rise of Nations 'Quick Start' tutorial and System Shock 2's first level provide real gameplay experience but with safety nets and lower consequences for experimentation.",
+                education: "School is often too punishing. Create 'horizontal learning' spaces for exploration before vertical advancement. Make failure informative, not final. Avoid forcing repeated mastery of easy content just to reach challenging parts. Students should be able to skip to where learning is actually happening."
+            },
+            11: {
+                title: "11. Skills as Strategies",
+                color: "#9b59b6",
+                principle: "Skills require extensive practice, which is boring in isolation. People practice more and enjoy it more when they see skills as strategies to accomplish meaningful goals, not as isolated drills.",
+                games: "Players learn skill packages while pursuing goals. They see skills as functional strategies first, as techniques to master second. Practice is embedded in purposeful action.",
+                example: "Rise of Nations skill tests package related capabilities and show how they enact strategies. Metal Gear Solid training exercises teach skills functionally - players learn to hide because they're trying to infiltrate, not because hiding is 'Lesson 3.'",
+                education: "Skills are necessary but should be learned as functional strategies for doing things learners care about. Isolated drill can pass tests but creates the 'fourth-grade slump' - students decode words but can't comprehend because they never learned reading as meaning-making. Skills must connect to authentic practice."
+            },
+            12: {
+                title: "12. System Thinking",
+                color: "#2ecc71",
+                principle: "Video games create and require system thinking - thinking in terms of relationships, not isolated events, facts, and skills. Learners must understand how elements relate to each other and to the whole.",
+                games: "Good games help players develop mental models of how game systems work. Players learn to see elements relationally and to anticipate how actions will cascade through interconnected systems.",
+                example: "Rise of Nations and Metal Gear Solid both require players to understand complex systems where actions have multiple interconnected consequences. Success requires seeing the system, not just memorizing facts.",
+                education: "In our complex, interconnected world, understanding systems is critical. Isolated facts without system understanding are meaningless and potentially dangerous as leverage for action. Students need to see subjects as complex interacting systems: ecosystems, historical processes, economic systems, etc."
+            },
+            13: {
+                title: "13. Meaning as Action Image",
+                color: "#2ecc71",
+                principle: "Humans don't usually think through abstract definitions and logic. They think through experiences they've had and imaginative reconstructions of experience. The mind is a simulation machine - we understand by running mental models of action.",
+                games: "In games, meanings emerge through player experiences and actions, not lectures. Good games make even philosophical ideas concrete through image and activity that players can experience and manipulate.",
+                example: "Star Wars: Knights of the Old Republic and Freedom Fighters make ideas about identity, ideology, and political systems concrete through experience. Players understand by living through situations, not by reading definitions.",
+                education: "Human comprehension is 'grounded in perceptual simulations that prepare agents for situated action.' Without experiential models to run mentally, people cannot truly understand. This reveals a kinship between how minds work and how games work - both are perceptual simulations preparing for action. Teach through experience and simulation, not just through words and definitions."
+            }
+        };
+        
+        function showModal(num) {
+            const data = principlesData[num];
+            const modalBody = document.getElementById('modal-body');
+            
+            modalBody.innerHTML = `
+                <h2 class="modal-title" style="color: ${data.color}">${data.title}</h2>
+                
+                <div class="modal-section">
+                    <span class="modal-label" style="color: ${data.color}">Core Principle</span>
+                    <div class="modal-text">${data.principle}</div>
+                </div>
+                
+                <div class="modal-section">
+                    <span class="modal-label" style="color: ${data.color}">In Games</span>
+                    <div class="game-box">${data.games}</div>
+                    <div class="example-box"><strong>Example:</strong> ${data.example}</div>
+                </div>
+                
+                <div class="modal-section">
+                    <span class="modal-label" style="color: ${data.color}">Educational Application</span>
+                    <div class="edu-box">${data.education}</div>
+                </div>
+            `;
+            
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        
+        // Close on outside click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
